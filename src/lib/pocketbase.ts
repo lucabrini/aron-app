@@ -12,7 +12,7 @@ pb.authStore.onChange((auth) => {
 })
 
 export async function getStudentInfo(studentId: string) {
-    return await pb.collection("students").getOne(studentId);
+    return await pb.collection("students").getOne(studentId, { expand: "instrument" });
 }
 export interface addLessonBody {
     teacher: string,
