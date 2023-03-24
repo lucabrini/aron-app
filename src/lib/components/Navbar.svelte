@@ -1,11 +1,14 @@
-<script>
+<script lang="ts">
     import HomeIcon from "$lib/icons/HomeIcon.svelte";
     import LessonsIcon from "$lib/icons/LessonsIcon.svelte";
     import StudentsIcons from "$lib/icons/StudentsIcons.svelte";
 
     import { page } from "$app/stores";
     $: currentPath = $page.url.pathname;
-    console.log(currentPath);
+
+    function redirectTo(path: string) {
+        location.pathname = path;
+    }
 
     let config = [
         {
@@ -29,12 +32,13 @@
 <div class="navbar">
     {#each config as navConfig}
         <div
+            on:mousedown={() => redirectTo(navConfig.path)}
             class={`navbar-item ${
                 navConfig.path === currentPath ? "active" : ""
             }`}
         >
             <svelte:component this={navConfig.icon} />
-            <a href={navConfig.path}>{navConfig.label}</a>
+            <span>{navConfig.label}</span>
         </div>
     {/each}
 </div>
@@ -51,9 +55,7 @@
 
     .active {
         @apply bg-zinc-800 text-white shadow;
-        transition: all ;
+        transition: all;
         transition-duration: 200;
     }
-
-
 </style>

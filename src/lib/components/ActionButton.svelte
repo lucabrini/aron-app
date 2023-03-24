@@ -10,9 +10,3 @@
     </span>
 </div>
 
-<style lang="postcss">
-    .action-button {
-        @apply bg-white w-1/3 p-2 shadow-xl rounded-lg flex flex-row 
-        justify-between items-center space-x-2;
-    }
-</style>

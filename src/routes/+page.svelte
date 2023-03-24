@@ -38,6 +38,6 @@
                 </p>
             </div>
         </div>
-        <a class="button" href="/add-lesson"> Aggiungi lezione svolta </a>
+        <a class="button button-dark-pressed" href="/add-lesson"> Aggiungi lezione svolta </a>
     </div>
 {/if}
