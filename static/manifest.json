@@ -1,0 +1,17 @@
+{
+    "short_name": "aron-app",
+    "name": "aron-app",
+    "start_url": "/",
+    "icons": [
+      {
+        "src": "logo_512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "background_color": "#f5f5f5",
+    "display": "fullscreen",
+    "scope": "/",
+    "theme_color": "#f5f5f5",
+    "description": "Registro presenze"
+}

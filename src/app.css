@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+
+    html,
+    body {
+        @apply bg-base overflow-hidden h-screen
+    }
+}
+
+.input {
+    @apply h-12 rounded-lg p-2 border
+}
+
+.input-date {
+    -webkit-appearance: none;
+    min-height: 1.2em;
+    display: block;
+}
+
+.button {
+    @apply h-14 rounded-lg w-full font-medium text-lg text-white bg-zinc-800
+    flex flex-row justify-center items-center shadow-xl no-underline
+}
+
+.icon {
+    @apply aspect-square rounded-lg flex flex-row items-center justify-center 
+    bg-zinc-800 text-white
+}
