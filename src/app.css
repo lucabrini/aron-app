@@ -30,7 +30,7 @@
 }
 
 .button-ligth-pressed:active {
-    @apply bg-zinc-200 duration-150;
+    @apply bg-zinc-200 duration-150 no-select;
 
 }
 

@@ -3,6 +3,8 @@
     import { currentUser, pb } from "$lib/pocketbase";
     import { onMount } from "svelte";
     import Loading from "$lib/components/Loading.svelte";
+    import UserIcon from "$lib/icons/UserIcon.svelte";
+    import QuickProfileButton from "$lib/components/QuickProfileButton.svelte";
 
     let lessons: object & { duration: number }[] = [];
     let loading = false;
@@ -23,7 +25,10 @@
     <Loading />
 {:else}
     <div class="prose flex flex-col space-y-4">
-        <h2 class="mt-4">Ciao {$currentUser?.name}!</h2>
+        <div class="flex flex-row justify-between items-center">
+            <h2 class="mt-4">Ciao {$currentUser?.name}!</h2>
+            <QuickProfileButton />
+        </div>
         <div class="bg-white rounded-lg shadow-lg p-4">
             <h3 class="m-0">Progresso</h3>
             <div class="flex flex-row space-x-4 items-center mt-2">
@@ -38,6 +43,8 @@
                 </p>
             </div>
         </div>
-        <a class="button button-dark-pressed" href="/add-lesson"> Aggiungi lezione svolta </a>
+        <a class="button button-dark-pressed" href="/add-lesson">
+            Aggiungi lezione svolta
+        </a>
     </div>
 {/if}

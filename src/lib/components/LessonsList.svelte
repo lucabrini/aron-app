@@ -4,19 +4,25 @@
     import Loading from "./Loading.svelte";
 
     export let studentId: string | undefined = undefined;
-    let lessons: any[] = [];
+    let lessons: (App.LessonDTO & App.ExpandStudent)[] = [];
+
     let loading = false;
 
     onMount(async () => {
         // The filter by teacher is applied at pocketbase side. WOW! :)
         loading = true;
         lessons = (
-            await pb.collection("lessons").getFullList({
-                expand: "student",
-                sort: "date",
-                ...(!!studentId ? { filter: `student="${studentId}"` } : {}),
-            })
+            await pb
+                .collection("lessons")
+                .getFullList<App.LessonDTO & App.ExpandStudent>({
+                    expand: "student",
+                    sort: "date",
+                    ...(!!studentId
+                        ? { filter: `student="${studentId}"` }
+                        : {}),
+                })
         ).reverse();
+        console.log(lessons)
         loading = false;
     });
 </script>
@@ -36,6 +42,7 @@
                 <p>
                     {lss.duration} minuti
                 </p>
+
                 <p class="font-medium m-0">{lss.expand.student.name}</p>
             </div>
         {/each}

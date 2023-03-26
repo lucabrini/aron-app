@@ -2,6 +2,7 @@
     import { page } from "$app/stores";
     import { addLesson, currentUser, getStudentInfo } from "$lib/pocketbase";
     import StudentsList from "$lib/components/StudentsList.svelte";
+    import { SpinLine } from "svelte-loading-spinners";
     import ActionButton from "$lib/components/ActionButton.svelte";
     import BackIcon from "$lib/icons/BackIcon.svelte";
     import CheckIcon from "$lib/icons/CheckIcon.svelte";
@@ -12,7 +13,10 @@
     let date: Date;
     let duration: number;
 
+    let loading = false;
+
     async function saveLesson() {
+        loading = true;
         const lessons = await addLesson({
             teacher: $currentUser!.id,
             student: studentId!,
@@ -72,8 +76,21 @@
             <ActionButton label="Indietro" onClick={() => (studentId = null)}>
                 <BackIcon />
             </ActionButton>
-            <ActionButton label="Salva" onClick={() => saveLesson()}>
-                <CheckIcon />
+            <ActionButton
+                disable={loading}
+                label="Salva"
+                onClick={() => saveLesson()}
+            >
+                {#if !loading}
+                    <CheckIcon />
+                {:else}
+                    <SpinLine
+                        size="40"
+                        color="#ffffff"
+                        unit="px"
+                        duration="5s"
+                    />
+                {/if}
             </ActionButton>
         </div>
     {/if}

@@ -1,26 +1,61 @@
 <script lang="ts">
-    import { getStudentInfo } from "$lib/pocketbase";
+    import { getStudentInfo, getStudentLessons } from "$lib/pocketbase";
     import ActionButton from "$lib/components/ActionButton.svelte";
     import BackIcon from "$lib/icons/BackIcon.svelte";
     import Loading from "$lib/components/Loading.svelte";
+    import { onMount } from "svelte";
 
     export let id: string;
     export let onClick: () => void;
+
+    let studentInfo: App.StudentDTO & App.ExpandInstrument;
+    let studentLessons: App.LessonDTO[];
+    let loading = true;
+
+    onMount(async () => {
+        studentInfo = await getStudentInfo(id);
+        studentLessons = await getStudentLessons(id);
+        loading = false;
+    });
 </script>
 
-{#await getStudentInfo(id)}
+{#if loading}
     <Loading />
-{:then studentInfo}
+{:else}
     <!-- Qui ci metto il view profile di uno studente -->
     <h2 class="mt-4">{studentInfo.name}</h2>
     <div>
         <h3>Strumenti</h3>
-        <div class="flex flex-col ">
-            <!-- svelte-ignore empty-block -->
+        <div class="flex flex-col space-y-2 ">
+            {#each studentInfo.expand.instrument as instrument}
+                <div
+                    class="bg-white p-4 rounded-lg gap-2 w-full flex flex-row shadow-md"
+                >
+                    <span>{instrument.emoticon}</span>
+                    <span>{instrument.name}</span>
+                </div>
+            {/each}
         </div>
         <h3>Lezioni</h3>
-        <div class="flex flex-col ">
-            <!-- svelte-ignore empty-block -->
+        <div class="flex flex-col space-y-2 ">
+            {#each studentLessons as lesson}
+                <div
+                    class="bg-white p-4 rounded-lg gap-2 w-full flex flex-row shadow-md justify-between"
+                >
+                    <span
+                        >{new Date(lesson.date)
+                            .toLocaleString()
+                            .split(",")[0]}</span
+                    >
+                    <span>{lesson.duration} minuti</span>
+                </div>
+            {/each}
+            <a
+                class="button button-dark-pressed"
+                href={"/add-lesson?student=" + id}
+            >
+                Aggiungi lezione svolta
+            </a>
         </div>
     </div>
     <div
@@ -30,4 +65,4 @@
             <BackIcon />
         </ActionButton>
     </div>
-{/await}
+{/if}

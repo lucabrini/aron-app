@@ -3,10 +3,9 @@
     import LessonsList from "$lib/components/LessonsList.svelte";
     import PlusIcon from "$lib/icons/PlusIcon.svelte";
 
-    function redirectToAddLesson(){
-        location.pathname = "/add-lesson"
+    function redirectToAddLesson() {
+        location.pathname = "/add-lesson";
     }
-
 </script>
 
 <div class="prose">
