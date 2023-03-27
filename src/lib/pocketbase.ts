@@ -12,7 +12,6 @@ pb.authStore.onChange((auth) => {
     currentUser.set(pb.authStore.model);
 })
 
-
 export async function getStudentInfo(studentId: string):
     Promise<App.StudentDTO & App.ExpandInstrument> {
     return await pb.collection(PocketCollections.students)
@@ -29,5 +28,9 @@ export async function getStudentLessons(studentId: string):
 }
 
 export async function addLesson(body: App.LessonDTO) {
-    return await pb.collection('lessons').create(body);
+    return await pb.collection(PocketCollections.lessons).create(body);
+}
+
+export async function removeLesson(id: App.Id) {
+    await pb.collection(PocketCollections.lessons).delete(id);
 }

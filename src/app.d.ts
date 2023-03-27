@@ -11,7 +11,7 @@ declare global {
 			emoticon : string
 		};
 		interface LessonDTO {
-			id ?: Id,
+			id : Id,
 			teacher : Id,
 			student : Id,
 			date : string,

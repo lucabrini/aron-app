@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { pb } from "$lib/pocketbase";
+    import DeleteIcon from "$lib/icons/DeleteIcon.svelte";
+    import { pb, removeLesson } from "$lib/pocketbase";
     import { onMount } from "svelte";
     import Loading from "./Loading.svelte";
 
@@ -22,9 +23,15 @@
                         : {}),
                 })
         ).reverse();
-        console.log(lessons)
+        console.log(lessons);
         loading = false;
     });
+
+    async function deleteLesson(id : App.Id) {
+        await removeLesson(id);
+        lessons = lessons.filter((v) => v.id != id);
+    }
+
 </script>
 
 {#if loading}
@@ -44,6 +51,13 @@
                 </p>
 
                 <p class="font-medium m-0">{lss.expand.student.name}</p>
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <span
+                    class="button-ligth-pressed p-2 rounded-md"
+                    on:click={() => deleteLesson(lss.id)}
+                >
+                    <DeleteIcon />
+                </span>
             </div>
         {/each}
     </div>

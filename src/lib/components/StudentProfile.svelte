@@ -52,7 +52,7 @@
             {/each}
             <a
                 class="button button-dark-pressed"
-                href={"/add-lesson?student=" + id}
+                href={"/lessons/create?student=" + id}
             >
                 Aggiungi lezione svolta
             </a>

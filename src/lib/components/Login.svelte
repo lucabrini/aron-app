@@ -1,11 +1,16 @@
 <script lang="ts">
-    import { currentUser, pb } from "$lib/pocketbase";
+    import { pb } from "$lib/pocketbase";
+    import { SpinLine } from "svelte-loading-spinners";
 
     let username: string;
     let password: string;
 
+    let loading = false;
+
     async function login() {
+        loading = true;
         await pb.collection("teachers").authWithPassword(username, password);
+        loading = false;
     }
 </script>
 
@@ -24,6 +29,12 @@
             bind:value={password}
             class="w-full input"
         />
-        <button class="button" on:click={login}> Login </button>
+        <button class="button" disabled={loading} on:click={login}>
+            {#if loading}
+                <SpinLine size="40" color="#ffffff" unit="px" duration="5s" />
+            {:else}
+                Login
+            {/if}
+        </button>
     </form>
 </div>

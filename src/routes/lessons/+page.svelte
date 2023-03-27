@@ -4,7 +4,7 @@
     import PlusIcon from "$lib/icons/PlusIcon.svelte";
 
     function redirectToAddLesson() {
-        location.pathname = "/add-lesson";
+        location.pathname = "/lessons/create";
     }
 </script>
 

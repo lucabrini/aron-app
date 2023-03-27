@@ -43,7 +43,7 @@
                 </p>
             </div>
         </div>
-        <a class="button button-dark-pressed" href="/add-lesson">
+        <a class="button button-dark-pressed" href="/lessons/create">
             Aggiungi lezione svolta
         </a>
     </div>
