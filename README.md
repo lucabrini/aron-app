@@ -5,6 +5,7 @@ This PWA allows the teachers of my musical Institute to keep track of student's 
 * SvelteKit
 * TailwindCSS
 * PocketBase as a Backend
+* Typescript
 
 ## Additional notes
 PWA was choice instead of a native app in order to achieve the following customer needs:
